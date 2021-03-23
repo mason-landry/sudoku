@@ -8,7 +8,7 @@ from tensorflow.keras.models import load_model
 if __name__ == "__main__":
     # load the digit classifier from disk
     print("[INFO] loading digit classifier...")
-    model = load_model('sudoku/output/digit_classifier.h5')
+    model = load_model('model.h5')
 
     image = cv2.imread('sudoku.png')
     puzzle, warped = find_puzzle(image, debug=False)
@@ -46,9 +46,11 @@ if __name__ == "__main__":
             
             # verify that the digit is not empty
             if digit is not None:
-                # resize the cell to 28x28 pixels and then prepare the
+                # resize the cell to 32x32 pixels and then prepare the
                 # cell for classification
-                roi = cv2.resize(digit, (28,28))
+                cv2.imshow("cell", cell)
+                cv2.waitKey(0)
+                roi = cv2.resize(cell, (32,32))
                 roi = roi.astype("float") / 255.0
                 roi = img_to_array(roi)
                 roi = np.expand_dims(roi, axis=0)
