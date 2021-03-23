@@ -64,7 +64,7 @@ def find_puzzle(image, debug=False):
 	# check to see if we are visualizing the perspective transform
 	if debug:
 		# show the output warped image (again, for debugging purposes)
-		cv2.imshow("Puzzle Transform", puzzle)
+		cv2.imshow("Puzzle Warped", warped)
 		cv2.waitKey(0)
 	# return a 2-tuple of puzzle in both RGB and grayscale
 	return (puzzle, warped)
