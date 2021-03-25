@@ -44,6 +44,8 @@ if __name__ == "__main__":
         seed=123,
         subset='training')
 
+    print(train_ds)
+
     ## Load train folder as training set
     test_ds = tf.keras.preprocessing.image_dataset_from_directory(
         data,
@@ -58,10 +60,10 @@ if __name__ == "__main__":
     ## Initialize model
     model = SudokuNet.build(width=32, height=32, depth=1, classes=9)    
     # compile model
-    opt = SGD(lr=0.00001, momentum=0.9)
+    opt = SGD(lr=0.0001, momentum=0.9)
     model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    H = model.fit(train_ds, epochs=75, verbose=1, validation_data=test_ds)
+    H = model.fit(train_ds, epochs=50, verbose=1, validation_data=test_ds)
     # Show curves
     summarize_diagnostics(H)
     # serialize the model to disk
