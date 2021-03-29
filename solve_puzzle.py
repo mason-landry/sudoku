@@ -10,8 +10,8 @@ if __name__ == "__main__":
     print("[INFO] loading digit classifier...")
     model = load_model('model.h5')
 
-    image = cv2.imread('sudoku1.jpg')
-    puzzle, warped = find_puzzle(image, debug=False)
+    image = cv2.imread('sudoku1.png')
+    puzzle, warped = find_puzzle(image, debug=True)
     # Initialize empty board
     board = Board()
 
@@ -48,12 +48,12 @@ if __name__ == "__main__":
             if digit is not None:
                 # resize the cell to 32x32 pixels and then prepare the
                 # cell for classification
-                roi = cv2.resize(digit, (32,32))
-                cv2.imshow("digit", roi)
-                cv2.waitKey(0)
+                roi = cv2.resize(digit, (28,28))
+                # cv2.imshow("digit", roi)
+                # cv2.waitKey(0)
                 roi = roi.astype("float32") / 255.0
                 roi = img_to_array(roi)
-                roi = roi.reshape(1, 32, 32, 1)
+                roi = roi.reshape(1, 28, 28, 1)
 
                 # roi = np.expand_dims(roi, axis=0)
                 # classify the digit and update the Sudoku board with the
